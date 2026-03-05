@@ -1,5 +1,6 @@
 const numberBtns = document.querySelectorAll(".number-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
+const deleteBtn = document.getElementById("delete-btn");
 const equalBtn = document.getElementById("equal-btn");
 const resetBtn = document.getElementById("reset-btn");
 const display = document.getElementById("display");
@@ -8,6 +9,9 @@ let currentNumber = "";
 let firstNumber = null;
 let operator = null;
 let justCalculated = false;
+if (currentNumber === "") {
+  display.textContent = "0";
+}
 
 numberBtns.forEach((button) => {
   button.addEventListener("click", () => {
@@ -17,7 +21,11 @@ numberBtns.forEach((button) => {
       justCalculated = false;
     }
     currentNumber += button.value;
-    display.textContent += button.value;
+    if (display.textContent === "0") {
+      display.textContent = button.value;
+    } else {
+      display.textContent += button.value;
+    }
   });
 });
 operatorBtns.forEach((button) => {
@@ -35,6 +43,15 @@ operatorBtns.forEach((button) => {
     display.textContent += operator;
     currentNumber = "";
   });
+});
+deleteBtn.addEventListener("click", () => {
+  if (display.textContent !== "0") {
+    currentNumber = currentNumber.slice(0, -1);
+    display.textContent = display.textContent.slice(0, -1);
+  }
+  if (display.textContent === "") {
+    display.textContent = "0";
+  }
 });
 equalBtn.addEventListener("click", () => {
   if (currentNumber === "" || firstNumber === null) return;
@@ -59,6 +76,6 @@ resetBtn.addEventListener("click", () => {
   currentNumber = "";
   firstNumber = null;
   operator = null;
-  display.textContent = "";
+  display.textContent = "0";
   justCalculated = false;
 });
