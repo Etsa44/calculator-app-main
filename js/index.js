@@ -12,7 +12,7 @@ let justCalculated = false;
 if (currentNumber === "") {
   display.textContent = "0";
 }
-
+// Pad button
 numberBtns.forEach((button) => {
   button.addEventListener("click", () => {
     if (justCalculated) {
@@ -28,6 +28,7 @@ numberBtns.forEach((button) => {
     }
   });
 });
+// Operator button
 operatorBtns.forEach((button) => {
   button.addEventListener("click", () => {
     if (justCalculated) {
@@ -44,6 +45,7 @@ operatorBtns.forEach((button) => {
     currentNumber = "";
   });
 });
+// Delete button
 deleteBtn.addEventListener("click", () => {
   if (display.textContent !== "0") {
     currentNumber = currentNumber.slice(0, -1);
@@ -53,6 +55,7 @@ deleteBtn.addEventListener("click", () => {
     display.textContent = "0";
   }
 });
+// Equal button
 equalBtn.addEventListener("click", () => {
   if (currentNumber === "" || firstNumber === null) return;
   let secondNumber = Number(currentNumber);
@@ -72,6 +75,7 @@ equalBtn.addEventListener("click", () => {
   firstNumber = null;
   operator = null;
 });
+// Reset button
 resetBtn.addEventListener("click", () => {
   currentNumber = "";
   firstNumber = null;

@@ -22,7 +22,7 @@ main {
   display: flex;
   justify-content: space-between;
 }
-.box-2 {
+.display-box {
   height: 15vh;
   width: 100%;
   padding: 1rem;
@@ -36,7 +36,7 @@ main {
   color: white;
   font-size: 2rem;
 }
-.box-3 {
+.pad-box {
   height: 75vh;
   width: 100%;
   padding: 1rem;
@@ -50,8 +50,12 @@ main {
   width: 20%;
   height: 4rem;
   border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
   border-radius: 15%;
-  border-bottom: solid 4px rgba(128, 128, 128, 0.327);
+  border-bottom: solid 4px hsl(28, 16%, 65%);
+  background-color: hsl(30, 25%, 89%);
+  color: hsl(221, 14%, 31%);
 }
 .btn-box {
   width: 100%;
@@ -72,5 +76,32 @@ main {
   height: 4rem;
   border: none;
   border-radius: 5px;
-  border-bottom: solid 4px rgba(128, 128, 128, 0.327);
+}
+#delete-btn {
+  background-color: hsl(225, 21%, 49%);
+  border-bottom: solid 4px hsl(224, 28%, 35%);
+  color: hsl(0, 0%, 100%);
+}
+#reset-btn {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: hsl(225, 21%, 49%);
+  border-bottom: solid 4px hsl(224, 28%, 35%);
+  color: hsl(0, 0%, 100%);
+}
+#equal-btn {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: hsl(6, 63%, 50%);
+  border-bottom: solid 4px hsl(6, 70%, 34%);
+  color: hsl(0, 0%, 100%);
+}
+footer p {
+  padding: 1rem;
+  font-size: small;
+  color: white;
+  text-align: center;
+}
+footer a {
+  color: rgba(255, 255, 0, 0.79);
 }
