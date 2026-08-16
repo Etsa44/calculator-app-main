@@ -1,3 +1,9 @@
+import { padTouch } from "./button.js";
+import { deleteTouch } from "./delete.js";
+import { equalTouch } from "./equal.js";
+import { operatorTouch } from "./operator.js";
+import { resetTouch } from "./reset.js";
+
 const numberBtns = document.querySelectorAll(".number-btn");
 const operatorBtns = document.querySelectorAll(".operator-btn");
 const deleteBtn = document.getElementById("delete-btn");
@@ -5,81 +11,36 @@ const equalBtn = document.getElementById("equal-btn");
 const resetBtn = document.getElementById("reset-btn");
 const display = document.getElementById("display");
 
-let currentNumber = "";
-let firstNumber = null;
-let operator = null;
-let justCalculated = false;
-if (currentNumber === "") {
+const state = {
+  firstNumber: null,
+  currentNumber: "",
+  operator: null,
+  justCalculated: false,
+};
+if (state.currentNumber === "") {
   display.textContent = "0";
 }
 // Pad button
 numberBtns.forEach((button) => {
   button.addEventListener("click", () => {
-    if (justCalculated) {
-      display.textContent = "";
-      currentNumber = "";
-      justCalculated = false;
-    }
-    currentNumber += button.value;
-    if (display.textContent === "0") {
-      display.textContent = button.value;
-    } else {
-      display.textContent += button.value;
-    }
+    padTouch(button, display, state);
   });
 });
 // Operator button
 operatorBtns.forEach((button) => {
   button.addEventListener("click", () => {
-    if (justCalculated) {
-      firstNumber = Number(display.textContent);
-      operator = button.value;
-      display.textContent += operator;
-      justCalculated = false;
-      return;
-    }
-    if (currentNumber === "") return;
-    firstNumber = Number(currentNumber);
-    operator = button.value;
-    display.textContent += operator;
-    currentNumber = "";
+    operatorTouch(button, display, state);
   });
 });
 // Delete button
 deleteBtn.addEventListener("click", () => {
-  if (display.textContent !== "0") {
-    currentNumber = currentNumber.slice(0, -1);
-    display.textContent = display.textContent.slice(0, -1);
-  }
-  if (display.textContent === "") {
-    display.textContent = "0";
-  }
+  deleteTouch(display, state);
 });
 // Equal button
 equalBtn.addEventListener("click", () => {
-  if (currentNumber === "" || firstNumber === null) return;
-  let secondNumber = Number(currentNumber);
-  let result;
-  if (operator === "+") {
-    result = firstNumber + secondNumber;
-  } else if (operator === "-") {
-    result = firstNumber - secondNumber;
-  } else if (operator === "*") {
-    result = firstNumber * secondNumber;
-  } else if (operator === "/") {
-    result = firstNumber / secondNumber;
-  }
-  display.textContent = result;
-  justCalculated = true;
-  currentNumber = "";
-  firstNumber = null;
-  operator = null;
+  equalTouch(display, state);
 });
 // Reset button
 resetBtn.addEventListener("click", () => {
-  currentNumber = "";
-  firstNumber = null;
-  operator = null;
-  display.textContent = "0";
-  justCalculated = false;
+  resetTouch(display, state);
 });
